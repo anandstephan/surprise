@@ -226,11 +226,18 @@
     </div>
 
     <script>
+      let musicPlayed = false; // Flag to track if music has been played
+
       function showFlirtMessage(flirtNum) {
         const flirtMessage = document.getElementById("flirtMessage");
         const birthdayImage = document.getElementById("birthdayImage");
         flirtMessage.style.display = "block";
         flirtMessage.classList = ""; // Reset animations
+
+        if (!musicPlayed) {
+          playMusic(); // Play music only the first time
+          musicPlayed = true; // Set the flag to true after playing music
+        }
 
         let message = "";
         let background = "";
@@ -271,13 +278,12 @@
         birthdayImage.src = imageSrc;
       }
 
-      // Play music when the page loads
-      window.onload = function () {
+      function playMusic() {
         const music = document.getElementById("backgroundMusic");
         music.play().catch(function (error) {
           console.log("Error playing audio: ", error);
         });
-      };
+      }
     </script>
   </body>
 </html>
