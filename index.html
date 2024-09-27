@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birthday Surprise</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #fff5e6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+        background: linear-gradient(135deg, #f5af19, #f12711);
+        transition: background 1.5s ease-in-out;
+      }
+
+      /* Responsive Container */
+      .container {
+        text-align: center;
+        padding: 20px;
+        width: 100%;
+        max-width: 400px;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+      }
+
+      h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+        color: #f12711;
+      }
+
+      /* Responsive Button Group */
+      .btn-group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      /* Button Styles */
+      .btn {
+        padding: 10px;
+        background-color: #f12711;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 1em;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        flex: 1;
+        min-width: 45%;
+      }
+
+      .btn:hover {
+        background-color: #d11609;
+        transform: scale(1.05);
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .btn:before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, #fff, transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        transform: translateY(100%) rotate(45deg);
+        z-index: 0;
+      }
+
+      .btn:hover:before {
+        opacity: 0.3;
+        transform: translateY(0%) rotate(45deg);
+      }
+
+      /* Ripple effect on click */
+      .btn:active {
+        transform: scale(0.98);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      .btn:after {
+        content: "";
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.6),
+          transparent 70%
+        );
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        transition: transform 0.5s ease;
+      }
+
+      .btn:active:after {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+      }
+
+      #flirtMessage {
+        font-size: 1.2em;
+        margin-top: 20px;
+        color: #333;
+        display: none;
+      }
+
+      /* Responsive Image */
+      .responsive-img {
+        width: 100%;
+        max-width: 350px;
+        height: auto;
+        border-radius: 20px;
+        margin-top: 20px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        animation: bounce 2s infinite;
+        transition: all 0.5s ease-in-out;
+      }
+
+      /* Bounce Effect for Image */
+      @keyframes bounce {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      /* CSS Effects for Messages */
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      /* Dynamic classes for message */
+      .fade-in {
+        animation: fadeIn 1.5s ease forwards;
+      }
+
+      /* Mobile Styles */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 1.8em;
+        }
+
+        .btn {
+          font-size: 0.9em;
+        }
+
+        .responsive-img {
+          max-width: 300px;
+        }
+      }
+
+      /* iPhone X and smaller */
+      @media (max-width: 375px) {
+        h1 {
+          font-size: 1.6em;
+        }
+
+        .responsive-img {
+          max-width: 250px;
+        }
+
+        .btn {
+          font-size: 0.8em;
+          padding: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎉 Happy Birthday! 🎉</h1>
+
+      <div class="btn-group">
+        <button class="btn" onclick="showFlirtMessage(1)">Wish 1</button>
+        <button class="btn" onclick="showFlirtMessage(2)">Wish 2</button>
+        <button class="btn" onclick="showFlirtMessage(3)">Wish 3</button>
+        <button class="btn" onclick="showFlirtMessage(4)">Wish 4</button>
+      </div>
+
+      <p id="flirtMessage"></p>
+
+      <!-- Responsive Images -->
+      <img
+        src="1.jpeg"
+        alt="Birthday Cake"
+        class="responsive-img"
+        id="birthdayImage"
+      />
+    </div>
+
+    <script>
+      function showFlirtMessage(flirtNum) {
+        const flirtMessage = document.getElementById("flirtMessage");
+        const birthdayImage = document.getElementById("birthdayImage");
+        flirtMessage.style.display = "block";
+        flirtMessage.classList = ""; // Reset animations
+
+        let message = "";
+        let background = "";
+        let imageSrc = "";
+
+        // Customize the message, background, and image for each button
+        switch (flirtNum) {
+          case 1:
+            message = "You light up the world like these candles! 🎂";
+            background = "linear-gradient(135deg, #ff7e5f, #feb47b)";
+            imageSrc = "1.jpeg";
+            break;
+          case 2:
+            message = "Wishing you a day filled with happiness and joy! 🎉";
+            background = "linear-gradient(135deg, #00c6ff, #0072ff)";
+            imageSrc = "2.jpeg";
+            break;
+          case 3:
+            message = "May your birthday be as sweet as the cake! 🎈";
+            background = "linear-gradient(135deg, #f5af19, #f12711)";
+            imageSrc = "3.jpeg";
+            break;
+          case 4:
+            message = "Here's to another year of unforgettable moments! 🥳";
+            background = "linear-gradient(135deg, #ff512f, #dd2476)";
+            imageSrc = "4.jpeg";
+            break;
+        }
+
+        // Set the message, background, and image
+        flirtMessage.textContent = message;
+        flirtMessage.classList.add("fade-in");
+        document.body.style.background = background;
+        birthdayImage.src = imageSrc;
+      }
+    </script>
+  </body>
+</html>

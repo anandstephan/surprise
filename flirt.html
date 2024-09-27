@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flirty Surprise</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f5f5f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #f5af19, #f12711);
+      }
+
+      .container {
+        text-align: center;
+        padding: 20px;
+        max-width: 600px;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      h1 {
+        font-size: 2.4em;
+        margin-bottom: 20px;
+        color: #f12711;
+      }
+
+      .btn-group {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        background-color: #f12711;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 1.2em;
+        transition: background-color 0.3s ease;
+      }
+
+      .btn:hover {
+        background-color: #d11609;
+      }
+
+      #flirtMessage {
+        font-size: 1.5em;
+        margin-top: 20px;
+        color: #333;
+        display: none;
+      }
+
+      /* CSS Effects */
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideIn {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes zoomIn {
+        0% {
+          transform: scale(0.5);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes spinIn {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Dynamic classes for message */
+      .fade-in {
+        animation: fadeIn 1.5s ease forwards;
+      }
+
+      .slide-in {
+        animation: slideIn 1.5s ease forwards;
+      }
+
+      .zoom-in {
+        animation: zoomIn 1.5s ease forwards;
+      }
+
+      .spin-in {
+        animation: spinIn 1.5s ease forwards;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>💬 Flirt Mode On 💬</h1>
+
+      <div class="btn-group">
+        <button class="btn" onclick="showFlirtMessage(1)">Flirt 1</button>
+        <button class="btn" onclick="showFlirtMessage(2)">Flirt 2</button>
+        <button class="btn" onclick="showFlirtMessage(3)">Flirt 3</button>
+        <button class="btn" onclick="showFlirtMessage(4)">Flirt 4</button>
+      </div>
+
+      <p id="flirtMessage"></p>
+    </div>
+
+    <script>
+      function showFlirtMessage(flirtNum) {
+        const flirtMessage = document.getElementById("flirtMessage");
+        flirtMessage.style.display = "block";
+        flirtMessage.classList = ""; // Reset animations
+
+        let message = "";
+        let effect = "";
+
+        // Customize the message and effect for each button
+        switch (flirtNum) {
+          case 1:
+            message =
+              "Are you made of copper and tellurium? Because you're Cu-Te! 😉";
+            effect = "fade-in";
+            break;
+          case 2:
+            message = "Do you have a map? I keep getting lost in your eyes. 😍";
+            effect = "slide-in";
+            break;
+          case 3:
+            message =
+              "Is your name Google? Because you have everything I’ve been searching for. 😘";
+            effect = "zoom-in";
+            break;
+          case 4:
+            message = "If beauty were time, you'd be an eternity. 🌟";
+            effect = "spin-in";
+            break;
+          default:
+            message = "You are amazing! ❤️";
+            effect = "fade-in";
+        }
+
+        // Set message text and apply effect class
+        flirtMessage.textContent = message;
+        flirtMessage.classList.add(effect);
+      }
+    </script>
+  </body>
+</html>
